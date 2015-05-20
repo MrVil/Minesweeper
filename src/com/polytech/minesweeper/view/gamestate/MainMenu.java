@@ -36,9 +36,9 @@ public class MainMenu extends GameState {
         Border blackline = BorderFactory.createLineBorder(Color.black,1);
 
         for(int i = 0; i<100;i++){
-            //JComponent ptest = new Case();
-            //ptest.setBorder(blackline);
-            //pan.add(ptest);
+            JComponent ptest = new Case();
+            ptest.setBorder(blackline);
+            pan.add(ptest);
         }
         pan.setBorder(blackline);
         win.add(pan);
