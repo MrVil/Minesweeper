@@ -1,4 +1,4 @@
-package view.gamestate;
+package com.polytech.minesweeper.view.gamestate;
 import javax.swing.*;
 import java.util.Observer;
 

@@ -1,9 +1,6 @@
-package view;
+package com.polytech.minesweeper.view;
 import javax.swing.*;
-import view.gamestate.*;
-
-import view.gamestate.GameStateHandler;
-
+import com.polytech.minesweeper.view.gamestate.*;
 
 public class Minesweeper{
     public static void main(String[] args){
