@@ -1,5 +1,7 @@
 package com.polytech.minesweeper.view;
 
+import java.awt.GridLayout;
+
 import javax.swing.*;
 
 /**
@@ -8,7 +10,7 @@ import javax.swing.*;
 public class MainPanel extends JPanel{
 
     public MainPanel(){
-        super();
+        super(new GridLayout(10,10));
         for(int i = 0; i < 100; i++){
             this.add(new Tile());
         }
