@@ -27,7 +27,6 @@ public class TilePanel extends JPanel implements Observer{
         this.setBorder(blackline);
         this.addMouseListener(this.tileControleur);
         this.tileControleur = new TileControleur();
-        this.tile = new Tile();
         this.tileControleur.setTile(this.tile);
         this.tileControleur.setTilePanel(this);
     }

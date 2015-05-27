@@ -13,19 +13,20 @@ public class Board {
 
     private int width, heigth;
     private Tile[][] gameboard;
+    private HashMap<Tile, Vector2> tileContext;
 
     public Board(int width, int height){
         this.heigth = height;
         this.width = width;
         gameboard = new Tile[width][height];
+        tileContext = new HashMap<Tile, Vector2>();
 
         Tile.Type type = Tile.Type.empty;
-        HashMap<Tile, Vector2> hm = new HashMap<Tile, Vector2>();
 
         for(int i = 0; i < width; i++)
             for(int j = 0; j < height; j++) {
                 gameboard[i][j] = new Tile(this, type);
-                hm.put(gameboard[i][j], new Vector2(i, j));
+                tileContext.put(gameboard[i][j], new Vector2(i, j));
             }
 
     }
