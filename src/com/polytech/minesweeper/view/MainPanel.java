@@ -5,7 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.*;
 
 /**
- * Created by Vil on 26/05/2015.
+ * Created by Guyl.B on 26/05/2015.
  */
 public class MainPanel extends JPanel{
 

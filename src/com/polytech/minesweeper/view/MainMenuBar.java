@@ -3,7 +3,7 @@ package com.polytech.minesweeper.view;
 import javax.swing.*;
 
 /**
- * Created by Vil on 26/05/2015.
+ * Created by Guyl.B on 26/05/2015.
  */
 public class MainMenuBar extends JMenuBar {
 
