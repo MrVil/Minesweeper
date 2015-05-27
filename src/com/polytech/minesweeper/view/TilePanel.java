@@ -33,7 +33,19 @@ public class TilePanel extends JPanel implements Observer{
     
 	@Override
 	public void update(Observable arg0, Object arg1) {
+		if(arg0 == tileControleur){
+			
 		
+		if(tile.getState() == Tile.State.hidden){
+			setBackground(Color.BLACK);
+		}
+		if(tile.getState() == Tile.State.flagged){
+			setBackground(Color.GREEN);
+		}
+		if(tile.getState() == Tile.State.marked){
+			setBackground(Color.RED);
+		}
+		}
 	}
     
 }

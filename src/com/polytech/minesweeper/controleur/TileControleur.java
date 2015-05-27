@@ -18,10 +18,19 @@ public class TileControleur extends Observable implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
         if(SwingUtilities.isLeftMouseButton(arg0)){
-            /*setBackground(Color.BLACK);*/}
+            tile.setState(Tile.State.revealed);}
         if(SwingUtilities.isRightMouseButton(arg0)){
-            /*setBackground(Color.RED);*/}
-		
+            if(tile.getState() == Tile.State.hidden){
+            	tile.setState(Tile.State.flagged);
+            }
+            if(tile.getState() == Tile.State.flagged){
+            	tile.setState(Tile.State.marked);
+            }
+            if(tile.getState() == Tile.State.marked){
+            	tile.setState(Tile.State.hidden);
+            }}            
+            
+		notifyObservers(tilePanel);
 	}
 	
 	public void addObserver(Observer obs){
@@ -31,7 +40,7 @@ public class TileControleur extends Observable implements MouseListener {
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

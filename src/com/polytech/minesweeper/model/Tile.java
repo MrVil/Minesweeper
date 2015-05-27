@@ -8,8 +8,8 @@ import java.util.GregorianCalendar;
 
 public class Tile {
 
-    static enum State {flagged, marked, hidden, revealed};
-    static enum Type {empty, numbered, mined};
+    public static enum State {flagged, marked, hidden, revealed};
+    public static enum Type {empty, numbered, mined};
 
     private State state;
     private Type type;
