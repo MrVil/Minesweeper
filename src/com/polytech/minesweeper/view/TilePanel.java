@@ -7,8 +7,6 @@ import com.polytech.minesweeper.controleur.TileControleur;
 import com.polytech.minesweeper.model.Tile;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -23,28 +21,29 @@ public class TilePanel extends JPanel implements Observer{
     
     public TilePanel(){
         super();
+        this.tile = new Tile();
         this.setBackground(Color.GRAY);
         this.setBorder(blackline);
-        this.addMouseListener(this.tileControleur);
         this.tileControleur = new TileControleur();
         this.tileControleur.setTile(this.tile);
-        this.tileControleur.setTilePanel(this);
+        this.addMouseListener(tileControleur);
+        tileControleur.addObserver(this);
+        
     }
     
 	@Override
 	public void update(Observable arg0, Object arg1) {
+		System.out.println("update en cours");
 		if(arg0 == tileControleur){
-			
-		
-		if(tile.getState() == Tile.State.hidden){
-			setBackground(Color.BLACK);
-		}
-		if(tile.getState() == Tile.State.flagged){
-			setBackground(Color.GREEN);
-		}
-		if(tile.getState() == Tile.State.marked){
-			setBackground(Color.RED);
-		}
+			if(tile.getState() == Tile.State.hidden){
+				setBackground(Color.GRAY);
+			}
+			if(tile.getState() == Tile.State.flagged){
+				setBackground(Color.GREEN);
+			}
+			if(tile.getState() == Tile.State.marked){
+				setBackground(Color.RED);
+			}
 		}
 	}
     

@@ -1,10 +1,11 @@
 package com.polytech.minesweeper.controleur;
 
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 import javax.swing.SwingUtilities;
 
@@ -13,28 +14,38 @@ import com.polytech.minesweeper.view.TilePanel;
 
 public class TileControleur extends Observable implements MouseListener {
 
-	private Tile tile;
+	private Tile tile;	
 	private Observer tilePanel;
+	//private ArrayList<Observer> observers = new ArrayList<Observer>();
+	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
         if(SwingUtilities.isLeftMouseButton(arg0)){
             tile.setState(Tile.State.revealed);}
         if(SwingUtilities.isRightMouseButton(arg0)){
             if(tile.getState() == Tile.State.hidden){
+            	System.out.println("tile was hidden");
             	tile.setState(Tile.State.flagged);
+            	System.out.println("tile is now flagged");
             }
-            if(tile.getState() == Tile.State.flagged){
+            else if(tile.getState() == Tile.State.flagged){
+            	System.out.println("tile was flagged");
             	tile.setState(Tile.State.marked);
+            	System.out.println("tile is now marked");
             }
-            if(tile.getState() == Tile.State.marked){
+            else if(tile.getState() == Tile.State.marked){
+            	System.out.println("tile was marked");
             	tile.setState(Tile.State.hidden);
-            }}            
-            
-		notifyObservers(tilePanel);
+            	System.out.println("tile is now hidden");
+            }}             
+        setChanged();
+		notifyObservers();
+		System.out.println("nombre d'observeur" + this.countObservers());
 	}
 	
-	public void addObserver(Observer obs){
-		this.setTilePanel(obs);
+	private void setTilePanel(Observer obs) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -69,13 +80,8 @@ public class TileControleur extends Observable implements MouseListener {
 		this.tile = tile;
 	}
 
-	public Observer getTilePanel() {
-		return tilePanel;
-	}
 
-	public void setTilePanel(Observer tilePanel) {
-		this.tilePanel = tilePanel;
-	}
+	
 
 
 }

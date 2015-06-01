@@ -20,6 +20,9 @@ public class Tile {
         this.type = type;
         state = State.hidden;
     }
+    public Tile(){
+    	state = State.hidden;
+    }
     
     public void setState(State state)   { this.state = state; }
     public State getState()             { return this.state; }
