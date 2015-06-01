@@ -13,16 +13,18 @@ import java.util.Vector;
 public class Board {
 
     private int width, heigth;
-    private Tile[][] gameboard;
     private HashMap<Tile, Vector2> tileContext;
     private int nbBombs = 15;
     private Random i = new Random();
+    private HashMap<Vector2, Tile> vectorContext;
+    private Tile[][] gameboard;
 
     public Board(int width, int height){
         this.heigth = height;
         this.width = width;
         gameboard = new Tile[width][height];
         tileContext = new HashMap<Tile, Vector2>();
+        vectorContext = new HashMap<Vector2, Tile>();
 
         Tile.Type type = Tile.Type.empty;
 
@@ -30,6 +32,7 @@ public class Board {
             for(int j = 0; j < height; j++) {
                 gameboard[i][j] = new Tile(this, type);
                 tileContext.put(gameboard[i][j], new Vector2(i, j));
+                vectorContext.put(new Vector2(i, j), gameboard[i][j]);
             }
         int nbwhile= 0;
         while(nbBombs>0){
@@ -64,11 +67,23 @@ public class Board {
 	}
 	
     public Tile getTile(int x, int y){
-        return gameboard[x][y];
+    	return gameboard[x][y];
+       // return vectorContext.get(new Vector2(x, y));
     }
 
-    public void updateNeigbourd(Tile tile){
 
+    public void revealNeigbourg(Tile tile){
+        if(tile == null)
+            return;
+        Tile tileTmp = null;
+        Vector2 posTmp = null;
+        Vector2 position = tileContext.get(tile);
+        for(int i = -1; i < 2; i++)
+            for (int j = -1; j < 2; j++) {
+                posTmp = position.add(i, j);
+                tileTmp = vectorContext.get(posTmp);
+                revealNeigbourg(tileTmp);
+            }
     }
 
 }

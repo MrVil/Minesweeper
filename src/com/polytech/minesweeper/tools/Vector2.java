@@ -17,4 +17,7 @@ public class Vector2 {
         this.y = y;
     }
 
+    public Vector2 add(int x, int y){
+        return new Vector2(this.x + x, this.y + y);
+    }
 }
