@@ -1,16 +1,19 @@
 package com.polytech.minesweeper.model;
 
 import java.util.GregorianCalendar;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by Guyl.B on 27/05/15.
  */
 
-public class Tile {
+public class Tile extends Observable {
 
     public static enum State {flagged, marked, hidden, revealed};
     public static enum Type {empty, numbered, mined};
 
+    private Observer TilePanel;
     private State state;
     private Type type;
     private Board board;
@@ -30,5 +33,9 @@ public class Tile {
     public Type getType()               { return this.type; }
 
     public Board getBoard()             { return this.board; }
+	public void callUpdatePanel() {
+		this.setChanged();
+		this.notifyObservers();
+	}
 
 }

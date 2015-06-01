@@ -12,7 +12,7 @@ import javax.swing.SwingUtilities;
 import com.polytech.minesweeper.model.Tile;
 import com.polytech.minesweeper.view.TilePanel;
 
-public class TileControleur extends Observable implements MouseListener {
+public class TileControleur implements MouseListener {
 
 	private Tile tile;	
 	private Observer tilePanel;
@@ -37,17 +37,10 @@ public class TileControleur extends Observable implements MouseListener {
             	System.out.println("tile was marked");
             	tile.setState(Tile.State.hidden);
             	System.out.println("tile is now hidden");
-            }}             
-        setChanged();
-		notifyObservers();
-		System.out.println("nombre d'observeur" + this.countObservers());
-	}
+            }}
+        tile.callUpdatePanel();
+    }
 	
-	private void setTilePanel(Observer obs) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub

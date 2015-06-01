@@ -27,14 +27,14 @@ public class TilePanel extends JPanel implements Observer{
         this.tileControleur = new TileControleur();
         this.tileControleur.setTile(this.tile);
         this.addMouseListener(tileControleur);
-        tileControleur.addObserver(this);
+        tile.addObserver(this);
         
     }
     
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		System.out.println("update en cours");
-		if(arg0 == tileControleur){
+		if(arg0 == tile){
 			if(tile.getState() == Tile.State.hidden){
 				setBackground(Color.GRAY);
 			}
