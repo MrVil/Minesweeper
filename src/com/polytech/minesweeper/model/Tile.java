@@ -26,13 +26,27 @@ public class Tile extends Observable {
     public Tile(){
     	state = State.hidden;
     }
-    
-    public void setState(State state)   { this.state = state; }
+
     public State getState()             { return this.state; }
 
     public Type getType()               { return this.type; }
 
     public Board getBoard()             { return this.board; }
+
+    public void nextState(){
+        if(state == State.hidden)
+            state = State.flagged;
+        else if (state == State.flagged)
+            state = State.marked;
+        else if (state == State.marked)
+            state = State.hidden;
+    }
+
+    public void reveal(){
+        if(state == State.hidden)
+            state = State.revealed;
+    }
+
 	public void callUpdatePanel() {
 		this.setChanged();
 		this.notifyObservers();

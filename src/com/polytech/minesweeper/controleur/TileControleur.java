@@ -21,23 +21,10 @@ public class TileControleur implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
         if(SwingUtilities.isLeftMouseButton(arg0)){
-            tile.setState(Tile.State.revealed);}
+            tile.reveal();}
         if(SwingUtilities.isRightMouseButton(arg0)){
-            if(tile.getState() == Tile.State.hidden){
-            	System.out.println("tile was hidden");
-            	tile.setState(Tile.State.flagged);
-            	System.out.println("tile is now flagged");
-            }
-            else if(tile.getState() == Tile.State.flagged){
-            	System.out.println("tile was flagged");
-            	tile.setState(Tile.State.marked);
-            	System.out.println("tile is now marked");
-            }
-            else if(tile.getState() == Tile.State.marked){
-            	System.out.println("tile was marked");
-            	tile.setState(Tile.State.hidden);
-            	System.out.println("tile is now hidden");
-            }}
+			tile.nextState();
+		}
         tile.callUpdatePanel();
     }
 	

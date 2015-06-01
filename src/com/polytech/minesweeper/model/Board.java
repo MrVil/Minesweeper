@@ -28,9 +28,14 @@ public class Board {
                 gameboard[i][j] = new Tile(this, type);
                 tileContext.put(gameboard[i][j], new Vector2(i, j));
             }
-
     }
 
+    public Tile getTile(int x, int y){
+        return gameboard[x][y];
+    }
 
+    public void updateNeigbourd(Tile tile){
+
+    }
 
 }
