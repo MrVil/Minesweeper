@@ -17,7 +17,8 @@ public class Tile extends Observable {
     private State state;
     private Type type;
     private Board board;
-
+    private int value = 0;
+    
     public Tile(Board board, Type type){
         this.board = board;
         this.type = type;
@@ -30,9 +31,13 @@ public class Tile extends Observable {
     public State getState()             { return this.state; }
 
     public Type getType()               { return this.type; }
+    public void setType(Type type)		{this.type = type;}		
 
     public Board getBoard()             { return this.board; }
-
+    public int getValue()				{ return this.value; }
+    public void setValue(int value)				{this.value = value;}
+    
+    
     public void nextState(){
         if(state == State.hidden)
             state = State.flagged;

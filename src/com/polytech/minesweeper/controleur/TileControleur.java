@@ -25,6 +25,7 @@ public class TileControleur implements MouseListener {
         if(SwingUtilities.isRightMouseButton(arg0)){
 			tile.nextState();
 		}
+        System.out.println("La tile est de type" + tile.getType() + " et sa valeur est  : " + tile.getValue());
         tile.callUpdatePanel();
     }
 	

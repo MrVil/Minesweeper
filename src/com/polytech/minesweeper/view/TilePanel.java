@@ -50,6 +50,35 @@ public class TilePanel extends JPanel implements Observer{
 			if(tile.getState() == Tile.State.marked){
 				setBackground(Color.RED);
 			}
+			if(tile.getState() == Tile.State.revealed){
+				if(tile.getType() == Tile.Type.mined){
+					setBackground(Color.PINK);
+				}
+				else if(tile.getValue() == -1){
+					setBackground(Color.MAGENTA);
+				}				
+				else if(tile.getValue() == 0){
+					setBackground(Color.YELLOW);
+				}
+				else if(tile.getValue() == 1){
+					setBackground(Color.BLACK);
+				}
+				else if(tile.getValue() == 2){
+					setBackground(Color.WHITE);
+				}
+				else if(tile.getValue() == 3){
+					setBackground(Color.BLUE);
+				}
+				else if(tile.getValue() == 4){
+					setBackground(Color.CYAN);
+				}
+				else if(tile.getValue() == 5){
+					setBackground(Color.MAGENTA);
+				}
+				else if(tile.getValue() == 6){
+					setBackground(Color.YELLOW);
+				}
+			}
 		}
 	}
 
