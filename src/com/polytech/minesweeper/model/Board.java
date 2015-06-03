@@ -14,7 +14,7 @@ public class Board {
 
     private int width, heigth;
     private HashMap<Tile, Vector2> tileContext;
-    private int nbBombs = 15;
+    private int nbBombs = 6;
     private Random i = new Random();
     private HashMap<Vector2, Tile> vectorContext;
     private Tile[][] gameboard;
@@ -71,6 +71,25 @@ public class Board {
        // return vectorContext.get(new Vector2(x, y));
     }
 
+    public void reveal(Tile tile){
+    	Vector2 position = this.tileContext.get(tile);
+    	if(tile.getValue() == 0 && tile.getState() != Tile.State.revealed){
+    		tile.reveal();
+    		for(int i = -1; i <2;i++){
+    			for(int j = -1;j<2;j++){
+    				int posx = position.x + i;
+    				int posy = position.y + j;
+    				if(posx<width && posx>=0 && posy<heigth && posy>=0){
+    					Tile t = gameboard[posx][posy]; 
+    					reveal(t);
+    				}
+    			}
+    		}
+    	}
+    	else{
+    		tile.reveal();
+    	}
+    }
 
     public void revealNeigbourg(Tile tile){
         if(tile == null)
