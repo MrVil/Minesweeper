@@ -23,6 +23,7 @@ public class TilePanel extends JPanel implements Observer{
 	private TileControleur tileControleur;
     private Border blackline = BorderFactory.createLineBorder(Color.black,1);
     private BufferedImage flagImg;
+    private JLabel label = new JLabel("", SwingConstants.CENTER);
     
     public TilePanel(Tile tile){
         super();
@@ -33,7 +34,7 @@ public class TilePanel extends JPanel implements Observer{
         this.tileControleur.setTile(this.tile);
         this.addMouseListener(tileControleur);
         tile.addObserver(this);
-
+        this.add(label);
         try{ flagImg = ImageIO.read(new File("content/img/flag.png")); }
         catch (IOException e){ e.printStackTrace(); }
     }
@@ -52,31 +53,48 @@ public class TilePanel extends JPanel implements Observer{
 			}
 			if(tile.getState() == Tile.State.revealed){
 				if(tile.getType() == Tile.Type.mined){
-					setBackground(Color.PINK);
+					setBackground(Color.RED);
 				}
-				else if(tile.getValue() == -1){
-					setBackground(Color.MAGENTA);
-				}				
-				else if(tile.getValue() == 0){
-					setBackground(Color.YELLOW);
-				}
-				else if(tile.getValue() == 1){
-					setBackground(Color.BLACK);
-				}
-				else if(tile.getValue() == 2){
-					setBackground(Color.WHITE);
-				}
-				else if(tile.getValue() == 3){
-					setBackground(Color.BLUE);
-				}
-				else if(tile.getValue() == 4){
-					setBackground(Color.CYAN);
-				}
-				else if(tile.getValue() == 5){
-					setBackground(Color.MAGENTA);
-				}
-				else if(tile.getValue() == 6){
-					setBackground(Color.YELLOW);
+				else{
+					setBackground(Color.white);
+					int val = this.tile.getValue();
+					switch (val){
+					
+						case 1 :
+							label.setText(String.valueOf(val));
+							label.setForeground(Color.BLUE);
+							break;
+						case 2 :
+							label.setText(String.valueOf(val));
+							label.setForeground(Color.GREEN);
+							break;
+						case 3 : 
+							label.setText(String.valueOf(val));
+							label.setForeground(Color.RED);
+							break;
+						case 4 : 
+							label.setText(String.valueOf(val));
+							break;
+						case 5 :
+							label.setText(String.valueOf(val));
+							break;
+						case 6 : 
+							label.setText(String.valueOf(val));
+							break;
+						case 7 : 
+							label.setText(String.valueOf(val));
+							break;
+						case 8 : 
+							label.setText(String.valueOf(val));
+							break;
+						default : 
+							break;
+						
+							
+							
+					}
+					label.setText();  
+				
 				}
 			}
 		}
