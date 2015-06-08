@@ -11,7 +11,7 @@ public class MainWindow extends JFrame{
         super();
 
         this.setJMenuBar(new MainMenuBar());
-        this.setContentPane(new MainPanel());
+        this.setContentPane(new MainPanel(10, 10));
         
         this.setTitle("Polytech - Minesweeper");
         this.setSize(800, 600);

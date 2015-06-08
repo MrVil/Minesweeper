@@ -93,8 +93,6 @@ public class TilePanel extends JPanel implements Observer{
 							
 							
 					}
-					label.setText();  
-				
 				}
 			}
 		}

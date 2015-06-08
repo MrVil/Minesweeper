@@ -21,7 +21,6 @@ public class Board {
         this.width = width;
         gameboard = new Tile[width][height];
         tileContext = new HashMap<Tile, Vector2>();
-        vectorContext = new HashMap<Vector2, Tile>();
 
         Tile.Type type = Tile.Type.empty;
 
@@ -35,7 +34,7 @@ public class Board {
 
     public void placeBombs(){
         Random rand = new Random();
-        
+
         while(nbBombs>0){
             int x = rand.nextInt(width);
             int y = rand.nextInt(height);
