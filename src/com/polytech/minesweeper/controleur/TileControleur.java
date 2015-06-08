@@ -20,9 +20,14 @@ public class TileControleur implements MouseListener {
 	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
+		if(tile.getBoard().isFirstClickMade() == false){
+			tile.getBoard().placeBombs(this.tile);
+			tile.getBoard().setFirstClickMade(true);
+		}
         if(SwingUtilities.isLeftMouseButton(arg0)){
             //tile.reveal();
-            tile.getBoard().reveal(tile);}
+            tile.getBoard().reveal(tile);
+        }
         if(SwingUtilities.isRightMouseButton(arg0)){
 			tile.nextState();
 		}

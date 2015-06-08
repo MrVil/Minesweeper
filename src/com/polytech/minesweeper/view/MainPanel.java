@@ -18,6 +18,7 @@ public class MainPanel extends JPanel{
         this.x = x;
         this.y = y;
         Board board = new Board(x, y, 20);
+
         for(int i = 0; i < 10; i++){
             for(int j = 0; j < 10; j++)
                 this.add(new TilePanel(board.getTile(i,j)));
