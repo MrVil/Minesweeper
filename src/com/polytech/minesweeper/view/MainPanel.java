@@ -15,7 +15,7 @@ public class MainPanel extends JPanel{
 
     public MainPanel(){
         super(new GridLayout(10,10));
-        Board board = new Board(x, y);
+        Board board = new Board(x, y,50);
         for(int i = 0; i < 10; i++){
             for(int j = 0; j < 10; j++)
                 this.add(new TilePanel(board.getTile(i,j)));

@@ -12,9 +12,13 @@ public class Board {
 
     private int width, height;
     private HashMap<Tile, Vector2> tileContext;
-    private int nbBombs = 6;
+    private int nbBombs;
     private HashMap<Vector2, Tile> vectorContext;
     private Tile[][] gameboard;
+    private boolean firstClickMade = false;
+    private int nbCaseToReveal;
+    
+    
 
     public Board(int width, int height, int nbBombs){
         this.height = height;
@@ -22,9 +26,8 @@ public class Board {
         gameboard = new Tile[width][height];
         tileContext = new HashMap<Tile, Vector2>();
         vectorContext = new HashMap<Vector2, Tile>();
-
+        this.nbBombs = nbBombs;
         Tile.Type type = Tile.Type.empty;
-
         for(int i = 0; i < width; i++)
             for(int j = 0; j < height; j++) {
                 gameboard[i][j] = new Tile(this, type);
@@ -33,14 +36,16 @@ public class Board {
             }
     }
 
-    public void placeBombs(){
+    public void placeBombs(Tile tile){
         Random rand = new Random();
-        
+        Vector2 posCaseIni = tileContext.get(tile);
+        int xCase = posCaseIni.x;
+        int yCase = posCaseIni.y;
         while(nbBombs>0){
             int x = rand.nextInt(width);
             int y = rand.nextInt(height);
             
-            if(gameboard[x][y].getType() != Tile.Type.mined){
+            if(gameboard[x][y].getType() != Tile.Type.mined && x != xCase && y != yCase){
                 gameboard[x][y].setType(Tile.Type.mined);
                 updateNeightbourgs(gameboard[x][y]);
                 nbBombs--;
@@ -85,4 +90,12 @@ public class Board {
     		tile.reveal();
     	}
     }
+
+	public boolean isFirstClickMade() {
+		return firstClickMade;
+	}
+
+	public void setFirstClickMade(boolean firstClickMade) {
+		this.firstClickMade = firstClickMade;
+	}
 }
