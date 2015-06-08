@@ -32,7 +32,6 @@ public class Board {
             for(int j = 0; j < height; j++) {
                 gameboard[i][j] = new Tile(this, type);
                 tileContext.put(gameboard[i][j], new Vector2(i, j));
-                vectorContext.put(new Vector2(i, j), gameboard[i][j]);
             }
     }
 
