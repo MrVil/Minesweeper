@@ -2,25 +2,22 @@ package com.polytech.minesweeper.model;
 
 import com.polytech.minesweeper.tools.Vector2;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.Vector;
 
 /**
  * Created by Guyl.B on 27/05/15.
  */
 public class Board {
 
-    private int width, heigth;
+    private int width, height;
     private HashMap<Tile, Vector2> tileContext;
     private int nbBombs = 6;
-    private Random i = new Random();
     private HashMap<Vector2, Tile> vectorContext;
     private Tile[][] gameboard;
 
-    public Board(int width, int height){
-        this.heigth = height;
+    public Board(int width, int height, int nbBombs){
+        this.height = height;
         this.width = width;
         gameboard = new Tile[width][height];
         tileContext = new HashMap<Tile, Vector2>();
@@ -34,23 +31,21 @@ public class Board {
                 tileContext.put(gameboard[i][j], new Vector2(i, j));
                 vectorContext.put(new Vector2(i, j), gameboard[i][j]);
             }
-        int nbwhile= 0;
-        while(nbBombs>0){
-        	
-        	int x = i.nextInt(width);
-        	System.out.println(x);
-        	int y = i.nextInt(height);
-        	System.out.println(y);
-        	if(gameboard[x][y].getType() != Tile.Type.mined){
-        		System.out.println("je place une bombe à la position x : " + x + "y : " + y );
-        		gameboard[x][y].setType(Tile.Type.mined);
-        		updateNeightbourgs(gameboard[x][y]);
-        		nbBombs--;
-        		nbwhile++;
-        	}
-        }
-        System.out.println(nbwhile);
+    }
+
+    public void placeBombs(){
+        Random rand = new Random();
         
+        while(nbBombs>0){
+            int x = rand.nextInt(width);
+            int y = rand.nextInt(height);
+            
+            if(gameboard[x][y].getType() != Tile.Type.mined){
+                gameboard[x][y].setType(Tile.Type.mined);
+                updateNeightbourgs(gameboard[x][y]);
+                nbBombs--;
+            }
+        }
     }
     
     private void updateNeightbourgs(Tile tile) {
@@ -59,7 +54,7 @@ public class Board {
 			for(int j = -1;j<2;j++){
 				int posx = position.x + i;
 				int posy = position.y + j;
-				if(posx<width && posx>=0 && posy<heigth && posy>=0){
+				if(posx<width && posx>=0 && posy< height && posy>=0){
 					gameboard[posx][posy].setValue(gameboard[posx][posy].getValue()+1);
 				}
 			}
@@ -79,7 +74,7 @@ public class Board {
     			for(int j = -1;j<2;j++){
     				int posx = position.x + i;
     				int posy = position.y + j;
-    				if(posx<width && posx>=0 && posy<heigth && posy>=0){
+    				if(posx<width && posx>=0 && posy< height && posy>=0){
     					Tile t = gameboard[posx][posy]; 
     					reveal(t);
     				}
@@ -90,19 +85,4 @@ public class Board {
     		tile.reveal();
     	}
     }
-
-    public void revealNeigbourg(Tile tile){
-        if(tile == null)
-            return;
-        Tile tileTmp = null;
-        Vector2 posTmp = null;
-        Vector2 position = tileContext.get(tile);
-        for(int i = -1; i < 2; i++)
-            for (int j = -1; j < 2; j++) {
-                posTmp = position.add(i, j);
-                tileTmp = vectorContext.get(posTmp);
-                revealNeigbourg(tileTmp);
-            }
-    }
-
 }
