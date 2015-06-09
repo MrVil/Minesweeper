@@ -1,6 +1,6 @@
 package com.polytech.minesweeper;
 
-import com.polytech.minesweeper.view.MainWindow;
+import com.polytech.minesweeper.view.windows.Main;
 
 import javax.swing.*;
 
@@ -12,6 +12,6 @@ public class Minesweeper {
     public static JFrame win;
 
     public static void main(String[] args){
-        win = new MainWindow();
+        win = new Main(10, 10);
     }
 }

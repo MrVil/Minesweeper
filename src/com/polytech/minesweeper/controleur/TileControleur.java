@@ -2,15 +2,11 @@ package com.polytech.minesweeper.controleur;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.Observable;
 import java.util.Observer;
-import java.util.Set;
 
 import javax.swing.SwingUtilities;
 
 import com.polytech.minesweeper.model.Tile;
-import com.polytech.minesweeper.view.TilePanel;
 
 public class TileControleur implements MouseListener {
 

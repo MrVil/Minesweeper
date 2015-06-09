@@ -1,4 +1,4 @@
-package com.polytech.minesweeper.view;
+package com.polytech.minesweeper.view.panels;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -17,7 +17,7 @@ import java.util.Observer;
 /**
  * Created by Vil on 26/05/2015.
  */
-public class TilePanel extends JPanel implements Observer{
+public class TileView extends JPanel implements Observer{
 
 	private Tile tile;
 	private TileControleur tileControleur;
@@ -29,7 +29,7 @@ public class TilePanel extends JPanel implements Observer{
     BufferedImage imgMine = null;
 		
 	
-    public TilePanel(Tile tile){
+    public TileView(Tile tile){
         super();
         this.tile = tile;
         this.setBackground(Color.GRAY);
@@ -74,24 +74,15 @@ public class TilePanel extends JPanel implements Observer{
 			}
 			if(tile.getState() == Tile.State.flagged){
 				setBackground(Color.GREEN);
-				label.setIcon(new ImageIcon(imgFlag));
 			}
 			if(tile.getState() == Tile.State.marked){
-				setBackground(Color.BLUE);
-				label.setIcon(new ImageIcon(imgAsking));
+				setBackground(Color.RED);
 			}
 			if(tile.getState() == Tile.State.revealed){
 				if(tile.getType() == Tile.Type.mined){
 					setBackground(Color.RED);
-					label.setIcon(null);
-					label.setIcon(new ImageIcon(imgMine));     
-					label.setHorizontalAlignment(JLabel.CENTER);
-			        label.setVerticalAlignment(JLabel.CENTER);
-		
-					
 				}
 				else{
-					label.setIcon(null);
 					setBackground(Color.white);
 					int val = this.tile.getValue();
 					switch (val){

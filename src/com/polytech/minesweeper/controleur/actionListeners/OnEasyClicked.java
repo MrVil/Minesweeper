@@ -8,14 +8,15 @@ import java.awt.event.ActionEvent;
 /**
  * Created by Guyl.B on 08/06/15.
  */
-public class OnRestartClicked extends MenuAction {
+public class OnEasyClicked extends MenuAction {
 
-    public OnRestartClicked (JFrame window){
+    public OnEasyClicked (JFrame window){
         super(window);
     }
 
     public void actionPerformed(ActionEvent e) {
         window.setContentPane(new Main(10, 10));
+        window.setSize(10*50+23, 10*50);
         window.validate();
     }
 }
