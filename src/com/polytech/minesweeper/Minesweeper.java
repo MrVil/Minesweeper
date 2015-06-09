@@ -12,6 +12,6 @@ public class Minesweeper {
     public static JFrame win;
 
     public static void main(String[] args){
-        win = new Main(10, 10);
+        win = new Main(9, 9,10);
     }
 }

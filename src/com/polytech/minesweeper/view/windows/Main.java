@@ -9,10 +9,10 @@ import javax.swing.*;
  */
 public class Main extends JFrame{
 
-    public Main(int height, int width){
+    public Main(int height, int width, int nbBombs){
         super();
 
-        JPanel board = new com.polytech.minesweeper.view.panels.Main(height, width);
+        JPanel board = new com.polytech.minesweeper.view.panels.Main(height, width, nbBombs);
         this.setJMenuBar(new MainBar(this));
         this.setContentPane(board);
         
@@ -21,7 +21,7 @@ public class Main extends JFrame{
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
-        this.setResizable(false);
+        this.setResizable(true);
 
     }
 

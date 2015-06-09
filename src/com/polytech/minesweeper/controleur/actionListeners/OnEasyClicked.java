@@ -15,7 +15,7 @@ public class OnEasyClicked extends MenuAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-        window.setContentPane(new Main(10, 10));
+        window.setContentPane(new Main(9, 9,10));
         window.setSize(10*50+23, 10*50);
         window.validate();
     }

@@ -15,7 +15,7 @@ public class OnHardClicked extends MenuAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-        window.setContentPane(new Main(20, 20));
+        window.setContentPane(new Main(16, 30, 99));
         window.setSize(20*50+23, 20*50);
         window.validate();
     }

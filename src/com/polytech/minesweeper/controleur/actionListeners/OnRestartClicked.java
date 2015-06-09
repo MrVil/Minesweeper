@@ -15,7 +15,11 @@ public class OnRestartClicked extends MenuAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-        window.setContentPane(new Main(10, 10));
+    	Main main = (Main)window.getContentPane();
+    	int width = main.getWidth2();
+    	int height = main.getHeight2();
+    	int nbBombs = main.getNbBombs();
+        window.setContentPane(new Main(height, width, nbBombs));
         window.validate();
     }
 }

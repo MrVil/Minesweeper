@@ -15,7 +15,7 @@ public class OnMediumClicked extends MenuAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-        window.setContentPane(new Main(15, 15));
+        window.setContentPane(new Main(16, 16, 40));
         window.setSize(15*50+23, 15*50);
         window.validate();
     }
