@@ -41,10 +41,30 @@ public class Board {
         time = new ClockThread();
         time.start();
     }
+    
+    public ArrayList<Tile> getNeightBourgs(Tile tile){
+    	ArrayList<Tile> result = new ArrayList<Tile>();
+    	Vector2 position = tileContext.get(tile);
+    	int x = position.x;
+    	int y = position.y;
+    	for(int i = -1; i<2;i++){
+    		for(int j = -1; j<2;j++){
+    			if(x+i>=0  && x+i<this.width && y+j>=0 && y+j<this.height)
+    				if(i != 0 || j!=0 ){
+    					result.add(gameboard[x+i][y+j]);
+    				}
+    		}
+    	}
+    	return result;
+    }
 
     public void placeBombs(Tile tile){
     	HashMap<Tile, Vector2> copy = new HashMap(tileContext);
     	copy.remove(tile);
+    	ArrayList<Tile> neightBourgs = getNeightBourgs(tile);
+    	for(Tile t : neightBourgs){
+    		copy.remove(t);
+    	}
     	List<Vector2> copyList = new ArrayList(copy.values());
     	System.out.println(copyList.size());
         Random rand = new Random();
