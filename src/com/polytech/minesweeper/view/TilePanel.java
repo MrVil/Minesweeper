@@ -24,7 +24,10 @@ public class TilePanel extends JPanel implements Observer{
     private Border blackline = BorderFactory.createLineBorder(Color.black,1);
     private BufferedImage flagImg;
     private JLabel label = new JLabel("", SwingConstants.CENTER);
-    
+    BufferedImage imgFlag = null;
+    BufferedImage imgMine = null;
+		
+	
     public TilePanel(Tile tile){
         super();
         this.tile = tile;
@@ -35,18 +38,34 @@ public class TilePanel extends JPanel implements Observer{
         this.addMouseListener(tileControleur);
         tile.addObserver(this);
         this.add(label);
-        try{ flagImg = ImageIO.read(new File("content/img/flag.png")); }
-        catch (IOException e){ e.printStackTrace(); }
-    }
+        try {
+			imgFlag = ImageIO.read(new File("content/img/flag.png"));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}        
+      }
+
+    
     
 	@Override
 	public void update(Observable arg0, Object arg1) {
+		
 		if(arg0 == tile){
+			if(this.tile.getType() == Tile.Type.mined && imgMine = null){
+	        	try {
+	        		imgMine = ImageIO.read(new File("content/img/mine.png"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	        }
 			if(tile.getState() == Tile.State.hidden){
 				setBackground(Color.GRAY);
 			}
 			if(tile.getState() == Tile.State.flagged){
 				setBackground(Color.GREEN);
+				label.setIcon(new ImageIcon(imgFlag));
 			}
 			if(tile.getState() == Tile.State.marked){
 				setBackground(Color.RED);
@@ -54,8 +73,12 @@ public class TilePanel extends JPanel implements Observer{
 			if(tile.getState() == Tile.State.revealed){
 				if(tile.getType() == Tile.Type.mined){
 					setBackground(Color.RED);
+					label.setIcon(null);
+					label.setIcon(new ImageIcon(imgMine));
+					
 				}
 				else{
+					label.setIcon(null);
 					setBackground(Color.white);
 					int val = this.tile.getValue();
 					switch (val){
@@ -97,14 +120,4 @@ public class TilePanel extends JPanel implements Observer{
 			}
 		}
 	}
-
-    @Override
-    protected void paintComponent(Graphics g){
-        super.paintComponent(g);
-        if(tile.getState() == Tile.State.flagged) {
-            g.drawImage(flagImg, this.getX(), this.getY(), this.getWidth(), this.getHeight(), this);
-            System.err.println("Flagged !");
-        }
-    }
-
 }

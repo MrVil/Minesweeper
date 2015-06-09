@@ -79,11 +79,10 @@ public class Board {
     		if(tile.getState() == Tile.State.revealed){
         		if(nbNeightBourgFlagged(tile) == tile.getValue())
         		{
-        			revealNeightBourgs(tile);
+        			revealNeightBourgsFlagged(tile);
         		}
         	}
     		this.nbCaseToReveal--;
-    		Vector2 position = this.tileContext.get(tile);
     		if(tile.getValue() == 0 && tile.getState() != Tile.State.revealed){
     			tile.reveal();
     			revealNeightBourgs(tile);
@@ -127,6 +126,23 @@ public class Board {
 					Tile t = gameboard[posx][posy]; 
 					if(t.getState() != Tile.State.revealed){
 						reveal(t);    						  						
+					}
+				}
+			}	
+		}
+    }
+	
+	
+	private void revealNeightBourgsFlagged(Tile tile){
+    	Vector2 position = this.tileContext.get(tile);
+    	for(int i = -1; i <2;i++){
+			for(int j = -1;j<2;j++){
+				int posx = position.x + i;
+				int posy = position.y + j;
+				if(posx<width && posx>=0 && posy< height && posy>=0){
+					Tile t = gameboard[posx][posy]; 
+					if(t.getState() != Tile.State.revealed && t.getState() != Tile.State.flagged){
+						t.reveal();    						  						
 					}
 				}
 			}	

@@ -31,7 +31,7 @@ public class Tile extends Observable {
     public State getState()             { return this.state; }
 
     public Type getType()               { return this.type; }
-    public void setType(Type type)		{this.type = type;}		
+    public void setType(Type type)		{this.type = type; notifyObservers();}		
 
     public Board getBoard()             { return this.board; }
     public int getValue()				{ return this.value; }
