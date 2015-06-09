@@ -13,10 +13,11 @@ public class Board {
     private int width, height;
     private HashMap<Tile, Vector2> tileContext;
     private int nbBombs;
-    private HashMap<Vector2, Tile> vectorContext;
     private Tile[][] gameboard;
     private boolean firstClickMade = false;
     private int nbCaseToReveal;
+    private boolean victory = false;
+    private boolean defeat = false;
     
     
 
@@ -26,7 +27,7 @@ public class Board {
         gameboard = new Tile[width][height];
         tileContext = new HashMap<Tile, Vector2>();
         this.nbBombs = nbBombs;
-
+        this.nbCaseToReveal = width*height - nbBombs;
         Tile.Type type = Tile.Type.empty;
         for(int i = 0; i < width; i++)
             for(int j = 0; j < height; j++) {
@@ -71,23 +72,90 @@ public class Board {
     }
 
     public void reveal(Tile tile){
-    	Vector2 position = this.tileContext.get(tile);
-    	if(tile.getValue() == 0 && tile.getState() != Tile.State.revealed){
-    		tile.reveal();
-    		for(int i = -1; i <2;i++){
-    			for(int j = -1;j<2;j++){
-    				int posx = position.x + i;
-    				int posy = position.y + j;
-    				if(posx<width && posx>=0 && posy< height && posy>=0){
-    					Tile t = gameboard[posx][posy]; 
-    					reveal(t);
-    				}
-    			}
-    		}
+    	if(tile.getType() == Tile.Type.mined){
+    		defeat();
     	}
     	else{
-    		tile.reveal();
+    		if(tile.getState() == Tile.State.revealed){
+        		if(nbNeightBourgFlagged(tile) == tile.getValue())
+        		{
+        			revealNeightBourgs(tile);
+        		}
+        	}
+    		this.nbCaseToReveal--;
+    		Vector2 position = this.tileContext.get(tile);
+    		if(tile.getValue() == 0 && tile.getState() != Tile.State.revealed){
+    			tile.reveal();
+    			revealNeightBourgs(tile);
+    		}	
+    		else if (tile.getState() != Tile.State.revealed){
+    			tile.reveal();    		
+    		}
     	}
+    	if(this.nbCaseToReveal == 0){
+    		this.victory();
+    	}
+    }
+    
+    private int nbNeightBourgFlagged(Tile tile) {
+    	int nbNeightBourgFlagged = 0; 
+    	Vector2 position = this.tileContext.get(tile);
+    	for(int i = -1; i <2;i++){
+    		for(int j = -1;j<2;j++){
+				int posx = position.x + i;
+				int posy = position.y + j;
+				if(posx<width && posx>=0 && posy< height && posy>=0){
+					Tile t = gameboard[posx][posy];
+					if(t.getState() == Tile.State.flagged){
+						
+						nbNeightBourgFlagged++;
+						 						  						
+					}
+				}
+			}	
+    	}
+		return nbNeightBourgFlagged;
+	}
+
+	private void revealNeightBourgs(Tile tile){
+    	Vector2 position = this.tileContext.get(tile);
+    	for(int i = -1; i <2;i++){
+			for(int j = -1;j<2;j++){
+				int posx = position.x + i;
+				int posy = position.y + j;
+				if(posx<width && posx>=0 && posy< height && posy>=0){
+					Tile t = gameboard[posx][posy]; 
+					if(t.getState() != Tile.State.revealed){
+						reveal(t);    						  						
+					}
+				}
+			}	
+		}
+    }
+    
+    private void victory() {
+		System.out.println("Félicitations grand maitre jedi");
+		this.victory = true;
+		
+	}
+
+	private void defeat() {
+		System.out.println("vous avez perdu");
+		this.revealAll();
+		this.defeat = false;
+	}
+
+	private void revealAll() {
+		for(int i = 0;i<width;i++){
+			for(int j = 0;j<height;j++){
+				gameboard[i][j].reveal();
+			}
+		}
+		
+	}
+
+	public boolean allTileReveal(){
+    	return this.nbCaseToReveal == 0;
     }
 
 	public boolean isFirstClickMade() {

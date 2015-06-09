@@ -48,7 +48,7 @@ public class Tile extends Observable {
     }
 
     public void reveal(){
-        if(state == State.hidden){
+        if(state != State.revealed){
             state = State.revealed;
             callUpdatePanel();
         }

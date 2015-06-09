@@ -25,7 +25,6 @@ public class TileControleur implements MouseListener {
 			tile.getBoard().setFirstClickMade(true);
 		}
         if(SwingUtilities.isLeftMouseButton(arg0)){
-            //tile.reveal();
             tile.getBoard().reveal(tile);
         }
         if(SwingUtilities.isRightMouseButton(arg0)){
