@@ -2,8 +2,11 @@ package com.polytech.minesweeper.model;
 
 import com.polytech.minesweeper.tools.Vector2;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
+import java.util.Timer;
 
 /**
  * Created by Guyl.B on 27/05/15.
@@ -18,7 +21,7 @@ public class Board {
     private int nbCaseToReveal;
     private boolean victory = false;
     private boolean defeat = false;
-    
+    ClockThread time;
     
 
     public Board(int width, int height, int nbBombs){
@@ -29,27 +32,33 @@ public class Board {
         this.nbBombs = nbBombs;
         this.nbCaseToReveal = width*height - nbBombs;
         Tile.Type type = Tile.Type.empty;
-        for(int i = 0; i < width; i++)
+        for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++) {
                 gameboard[i][j] = new Tile(this, type);
                 tileContext.put(gameboard[i][j], new Vector2(i, j));
             }
+        }
+        time = new ClockThread();
+        time.start();
     }
 
     public void placeBombs(Tile tile){
+    	HashMap<Tile, Vector2> copy = new HashMap(tileContext);
+    	copy.remove(tile);
+    	List<Vector2> copyList = new ArrayList(copy.values());
+    	System.out.println(copyList.size());
         Random rand = new Random();
-        Vector2 posCaseIni = tileContext.get(tile);
-        int xCase = posCaseIni.x;
-        int yCase = posCaseIni.y;
+        
         while(nbBombs>0){
-            int x = rand.nextInt(width);
-            int y = rand.nextInt(height);
-            
-            if(gameboard[x][y].getType() != Tile.Type.mined && x != xCase && y != yCase){
-                gameboard[x][y].setType(Tile.Type.mined);
-                updateNeightbourgs(gameboard[x][y]);
-                nbBombs--;
-            }
+        	int i = rand.nextInt(copyList.size());
+        	int x = copyList.get(i).x;
+            int y = copyList.get(i).y;
+            Tile t = gameboard[x][y];
+            t.setType(Tile.Type.mined);
+            updateNeightbourgs(t);
+            copyList.remove(i);
+            System.out.println(copyList.size());
+            nbBombs--;
         }
     }
     
@@ -82,18 +91,21 @@ public class Board {
         			revealNeightBourgsFlagged(tile);
         		}
         	}
-    		this.nbCaseToReveal--;
-    		if(tile.getValue() == 0 && tile.getState() != Tile.State.revealed){
-    			tile.reveal();
-    			revealNeightBourgs(tile);
-    		}	
-    		else if (tile.getState() != Tile.State.revealed){
-    			tile.reveal();    		
+    		else{
+    			this.nbCaseToReveal--;
+    			if(tile.getValue() == 0 && tile.getState() != Tile.State.revealed){
+    				tile.reveal();
+    				revealNeightBourgs(tile);
+    			}	
+    			else if	(tile.getState() != Tile.State.revealed){
+    				tile.reveal();    		
+    			}
     		}
     	}
     	if(this.nbCaseToReveal == 0){
     		this.victory();
     	}
+    	System.out.println(nbCaseToReveal);
     }
     
     private int nbNeightBourgFlagged(Tile tile) {
@@ -125,7 +137,7 @@ public class Board {
 				if(posx<width && posx>=0 && posy< height && posy>=0){
 					Tile t = gameboard[posx][posy]; 
 					if(t.getState() != Tile.State.revealed){
-						reveal(t);    						  						
+						reveal(t);
 					}
 				}
 			}	
@@ -143,6 +155,9 @@ public class Board {
 					Tile t = gameboard[posx][posy]; 
 					if(t.getState() != Tile.State.revealed && t.getState() != Tile.State.flagged){
 						t.reveal();    						  						
+						if(t.getType() == Tile.Type.mined){
+							this.defeat();
+						}
 					}
 				}
 			}	
@@ -152,12 +167,17 @@ public class Board {
     private void victory() {
 		System.out.println("Félicitations grand maitre jedi");
 		this.victory = true;
+		System.out.println(" Il vous a fallut : " + time.nbSec + " secondes pour terminer le démineur");
+		this.revealAll();
+		time.stop();
 		
 	}
 
 	private void defeat() {
 		System.out.println("vous avez perdu");
 		this.revealAll();
+		System.out.println(" Il vous a fallut : " + time.nbSec + " secondes pour terminer le démineur");
+		time.stop();
 		this.defeat = false;
 	}
 

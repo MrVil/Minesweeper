@@ -23,8 +23,9 @@ public class TilePanel extends JPanel implements Observer{
 	private TileControleur tileControleur;
     private Border blackline = BorderFactory.createLineBorder(Color.black,1);
     private BufferedImage flagImg;
-    private JLabel label = new JLabel("", SwingConstants.CENTER);
+    private JLabel label = new JLabel("", JLabel.CENTER);
     BufferedImage imgFlag = null;
+    BufferedImage imgAsking = null;
     BufferedImage imgMine = null;
 		
 	
@@ -44,7 +45,14 @@ public class TilePanel extends JPanel implements Observer{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}        
+		}
+        try {
+			imgAsking = ImageIO.read(new File("content/img/asking.png"));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
       }
 
     
@@ -61,6 +69,7 @@ public class TilePanel extends JPanel implements Observer{
 				}
 	        }
 			if(tile.getState() == Tile.State.hidden){
+				label.setIcon(null);
 				setBackground(Color.GRAY);
 			}
 			if(tile.getState() == Tile.State.flagged){
@@ -68,13 +77,17 @@ public class TilePanel extends JPanel implements Observer{
 				label.setIcon(new ImageIcon(imgFlag));
 			}
 			if(tile.getState() == Tile.State.marked){
-				setBackground(Color.RED);
+				setBackground(Color.BLUE);
+				label.setIcon(new ImageIcon(imgAsking));
 			}
 			if(tile.getState() == Tile.State.revealed){
 				if(tile.getType() == Tile.Type.mined){
 					setBackground(Color.RED);
 					label.setIcon(null);
-					label.setIcon(new ImageIcon(imgMine));
+					label.setIcon(new ImageIcon(imgMine));     
+					label.setHorizontalAlignment(JLabel.CENTER);
+			        label.setVerticalAlignment(JLabel.CENTER);
+		
 					
 				}
 				else{

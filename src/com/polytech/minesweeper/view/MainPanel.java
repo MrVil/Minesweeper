@@ -11,16 +11,12 @@ import javax.swing.*;
  */
 public class MainPanel extends JPanel{
 
-    int x = 10, y = 10;
-
+  
     public MainPanel(int x, int y){
         super(new GridLayout(x,y));
-        this.x = x;
-        this.y = y;
-        Board board = new Board(x, y, 15);
-
-        for(int i = 0; i < 10; i++){
-            for(int j = 0; j < 10; j++)
+        Board board = new Board(x, y, 9);
+        for(int i = 0; i < x; i++){
+            for(int j = 0; j < y; j++)
                 this.add(new TilePanel(board.getTile(i,j)));
         }
     }
