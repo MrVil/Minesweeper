@@ -76,10 +76,12 @@ public class TileView extends JPanel implements Observer{
 				setBackground(Color.GREEN);
 			}
 			if(tile.getState() == Tile.State.marked){
-				setBackground(Color.RED);
+				label.setIcon(new ImageIcon(imgAsking));
+				setBackground(Color.BLUE);
 			}
 			if(tile.getState() == Tile.State.revealed){
 				if(tile.getType() == Tile.Type.mined){
+					label.setIcon(new ImageIcon(imgMine));
 					setBackground(Color.RED);
 				}
 				else{

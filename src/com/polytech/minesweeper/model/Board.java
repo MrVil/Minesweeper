@@ -154,6 +154,7 @@ public class Board {
 				if(posx<width && posx>=0 && posy< height && posy>=0){
 					Tile t = gameboard[posx][posy]; 
 					if(t.getState() != Tile.State.revealed && t.getState() != Tile.State.flagged){
+						nbCaseToReveal--;
 						t.reveal();    						  						
 						if(t.getType() == Tile.Type.mined){
 							this.defeat();
