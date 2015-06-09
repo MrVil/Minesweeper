@@ -11,8 +11,12 @@ import javax.swing.*;
  */
 public class MainMenuBar extends JMenuBar {
 
-    public MainMenuBar(){
+    JFrame window;
+
+    public MainMenuBar(JFrame window){
         super();
+
+        this.window = window;
 
         //<MENU>
         JMenu menu = new JMenu("Partie");
@@ -20,17 +24,17 @@ public class MainMenuBar extends JMenuBar {
         //MENU ITEMS
         //--Start--//
         JMenuItem itemStart = new JMenuItem("Demarrer");
-        itemStart.addActionListener(new OnStartClicked());
+        itemStart.addActionListener(new OnStartClicked(window));
         menu.add(itemStart);
 
         //--Restart--//
         JMenuItem itemRestart = new JMenuItem("Recommencer");
-        itemRestart.addActionListener(new OnRestartClicked());
+        itemRestart.addActionListener(new OnRestartClicked(window));
         menu.add(itemRestart);
 
         //--Quit--//
         JMenuItem itemQuit = new JMenuItem("Quitter");
-        itemQuit.addActionListener(new OnQuitClicked());
+        itemQuit.addActionListener(new OnQuitClicked(window));
         menu.add(itemQuit);
 
         //</MENU>

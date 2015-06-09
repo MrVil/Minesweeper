@@ -9,7 +9,9 @@ import javax.swing.*;
  */
 public class Minesweeper {
 
+    public static JFrame win;
+
     public static void main(String[] args){
-        JFrame win = new MainWindow();
+        win = new MainWindow();
     }
 }

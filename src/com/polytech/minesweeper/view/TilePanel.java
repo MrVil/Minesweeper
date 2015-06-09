@@ -53,7 +53,7 @@ public class TilePanel extends JPanel implements Observer{
 	public void update(Observable arg0, Object arg1) {
 		
 		if(arg0 == tile){
-			if(this.tile.getType() == Tile.Type.mined && imgMine = null){
+			if(this.tile.getType() == Tile.Type.mined && imgMine == null){
 	        	try {
 	        		imgMine = ImageIO.read(new File("content/img/mine.png"));
 				} catch (IOException e) {
