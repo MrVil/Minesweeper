@@ -1,6 +1,6 @@
 package com.polytech.minesweeper.controleur.actionListeners;
 
-import com.polytech.minesweeper.view.panels.Main;
+import com.polytech.minesweeper.view.panels.MainPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,11 +15,12 @@ public class OnRestartClicked extends MenuAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-    	Main main = (Main)window.getContentPane();
+    	MainPanel main = (MainPanel)window.getContentPane();
     	int width = main.getWidth2();
     	int height = main.getHeight2();
     	int nbBombs = main.getNbBombs();
-        window.setContentPane(new Main(height, width, nbBombs));
+        window.setContentPane(new MainPanel(height, width, nbBombs));
         window.validate();
     }
 }
+

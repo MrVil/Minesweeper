@@ -1,6 +1,7 @@
 package com.polytech.minesweeper.view.windows;
 
 import com.polytech.minesweeper.view.menus.MainBar;
+import com.polytech.minesweeper.view.panels.MainPanel;
 
 import javax.swing.*;
 
@@ -12,9 +13,9 @@ public class Main extends JFrame{
     public Main(int height, int width, int nbBombs){
         super();
 
-        JPanel board = new com.polytech.minesweeper.view.panels.Main(height, width, nbBombs);
+        MainPanel mp = new MainPanel(height, width, nbBombs);
         this.setJMenuBar(new MainBar(this));
-        this.setContentPane(board);
+        this.setContentPane(mp);
         
         this.setTitle("Polytech - Minesweeper");
         this.setSize(height*50+23, width*50);

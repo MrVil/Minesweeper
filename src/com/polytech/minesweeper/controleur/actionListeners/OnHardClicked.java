@@ -1,6 +1,6 @@
 package com.polytech.minesweeper.controleur.actionListeners;
 
-import com.polytech.minesweeper.view.panels.Main;
+import com.polytech.minesweeper.view.panels.MainPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +15,7 @@ public class OnHardClicked extends MenuAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-        window.setContentPane(new Main(16, 30, 99));
+        window.setContentPane(new MainPanel(16, 30, 99));
         window.setSize(20*50+23, 20*50);
         window.validate();
     }

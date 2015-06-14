@@ -97,7 +97,7 @@ public class NewGame extends JFrame{
 
 
         this.setTitle("Nouvelle partie");
-        this.setSize(400, 150);
+        this.setSize(400, 170);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);

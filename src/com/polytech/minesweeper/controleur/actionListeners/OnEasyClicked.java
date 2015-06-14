@@ -1,6 +1,6 @@
 package com.polytech.minesweeper.controleur.actionListeners;
 
-import com.polytech.minesweeper.view.panels.Main;
+import com.polytech.minesweeper.view.panels.MainPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +15,7 @@ public class OnEasyClicked extends MenuAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-        window.setContentPane(new Main(9, 9,10));
+        window.setContentPane(new MainPanel(9, 9,10));
         window.setSize(10*50+23, 10*50);
         window.validate();
     }

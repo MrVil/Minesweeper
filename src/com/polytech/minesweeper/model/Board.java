@@ -2,16 +2,12 @@ package com.polytech.minesweeper.model;
 
 import com.polytech.minesweeper.tools.Vector2;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-import java.util.Timer;
+import java.util.*;
 
 /**
  * Created by Guyl.B on 27/05/15.
  */
-public class Board {
+public class Board extends Observable {
 
     private int width, height;
     private HashMap<Tile, Vector2> tileContext;
@@ -101,6 +97,7 @@ public class Board {
     }
 
     public void reveal(Tile tile){
+		this.notifyObservers();
     	if(tile.getType() == Tile.Type.mined){
     		defeat();
     	}
@@ -186,9 +183,9 @@ public class Board {
     }
     
     private void victory() {
-		System.out.println("Félicitations grand maitre jedi");
+		System.out.println("Fï¿½licitations grand maitre jedi");
 		this.victory = true;
-		System.out.println(" Il vous a fallut : " + time.nbSec + " secondes pour terminer le démineur");
+		System.out.println(" Il vous a fallut : " + time.nbSec + " secondes pour terminer le dï¿½mineur");
 		this.revealAll();
 		time.stop();
 		
@@ -197,7 +194,7 @@ public class Board {
 	private void defeat() {
 		System.out.println("vous avez perdu");
 		this.revealAll();
-		System.out.println(" Il vous a fallut : " + time.nbSec + " secondes pour terminer le démineur");
+		System.out.println(" Il vous a fallut : " + time.nbSec + " secondes pour terminer le dï¿½mineur");
 		time.stop();
 		this.defeat = false;
 	}
@@ -222,4 +219,6 @@ public class Board {
 	public void setFirstClickMade(boolean firstClickMade) {
 		this.firstClickMade = firstClickMade;
 	}
+
+
 }
