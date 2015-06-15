@@ -27,6 +27,7 @@ public class TileView extends JPanel implements Observer{
     BufferedImage imgFlag = null;
     BufferedImage imgAsking = null;
     BufferedImage imgMine = null;
+	BufferedImage imgBlank = null;
 		
 	
     public TileView(Tile tile){
@@ -41,18 +42,12 @@ public class TileView extends JPanel implements Observer{
         this.add(label);
         try {
 			imgFlag = ImageIO.read(new File("content/img/flag.png"));
-			
+			imgAsking = ImageIO.read(new File("content/img/asking.png"));
+			imgBlank = ImageIO.read(new File("content/img/blank.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        try {
-			imgAsking = ImageIO.read(new File("content/img/asking.png"));
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
+		label.setIcon(new ImageIcon(imgBlank));
       }
 
     
@@ -69,10 +64,10 @@ public class TileView extends JPanel implements Observer{
 				}
 	        }
 			if(tile.getState() == Tile.State.hidden){
-				label.setIcon(null);
 				setBackground(Color.GRAY);
 			}
 			if(tile.getState() == Tile.State.flagged){
+				label.setIcon(new ImageIcon(imgFlag));
 				setBackground(Color.GREEN);
 			}
 			if(tile.getState() == Tile.State.marked){

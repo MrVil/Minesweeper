@@ -1,7 +1,5 @@
 package com.polytech.minesweeper.view.panels;
 
-import com.polytech.minesweeper.model.Board;
-
 import javax.swing.*;
 import java.util.Observable;
 import java.util.Observer;
