@@ -236,4 +236,13 @@ public class Board extends Observable {
 	}
 
 
+	public boolean getVictory() {
+		callUpdate();
+		return victory;
+	}
+
+	public boolean getDefeat() {
+		callUpdate();
+		return defeat;
+	}
 }

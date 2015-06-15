@@ -22,5 +22,8 @@ public class BoardPanel extends JPanel{
         }
     }
 
+    public Board getBoard(){
+        return board;
+    }
 
 }

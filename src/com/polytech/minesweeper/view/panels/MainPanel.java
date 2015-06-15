@@ -30,7 +30,8 @@ public class MainPanel extends JPanel implements Observer {
         this.add(info, BorderLayout.PAGE_START);
         this.add(bp);
       	bp.board.addObserver(this);
-  
+
+
 
     }
 
@@ -42,6 +43,10 @@ public class MainPanel extends JPanel implements Observer {
     }
     public int getNbBombs() {
         return nbBombs;
+    }
+
+    public BoardPanel getBoardPanel(){
+        return bp;
     }
 
     @Override
