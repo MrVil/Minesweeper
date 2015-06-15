@@ -1,20 +1,25 @@
 package com.polytech.minesweeper.view.panels;
 
 import javax.swing.*;
+
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by Guyl.B on 15/06/15.
  */
-public class MainPanel extends JPanel {
+public class MainPanel extends JPanel implements Observer {
 
     private int width2;
     private int height2;
     private int nbBombs;
+    InfoPanel info;
+    BoardPanel bp;
 
     public MainPanel(int x, int y, int bombs){
-        InfoPanel info = new InfoPanel();
-        BoardPanel bp = new BoardPanel(x, y, bombs, info);
+        info = new InfoPanel(bombs);
+        bp = new BoardPanel(x, y, bombs, info);
 
         height2 = x;
         width2 = y;
@@ -22,6 +27,8 @@ public class MainPanel extends JPanel {
 
         this.add(info, BorderLayout.PAGE_START);
         this.add(bp);
+      	bp.board.addObserver(this);
+  
 
     }
 
@@ -33,6 +40,14 @@ public class MainPanel extends JPanel {
     }
     public int getNbBombs() {
         return nbBombs;
+    }
+
+    @Override
+    public void update(Observable obs, Object o) {
+        info.removeNbBombs();
+        //Board bd = (Board)obs;
+        info.nbBomb = new JLabel("3");
+        this.add(info.nbBomb);
     }
 
 }

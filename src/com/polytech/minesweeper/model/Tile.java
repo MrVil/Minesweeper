@@ -40,11 +40,13 @@ public class Tile extends Observable {
     
     public void nextState(){
         if(state == State.hidden)
-            state = State.flagged;
+        	state = State.flagged;
         else if (state == State.flagged)
             state = State.marked;
         else if (state == State.marked)
             state = State.hidden;
+        board.callUpdate();
+        callUpdatePanel();
     }
 
     public void reveal(){

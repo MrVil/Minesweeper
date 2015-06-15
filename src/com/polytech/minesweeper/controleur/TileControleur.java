@@ -27,7 +27,7 @@ public class TileControleur implements MouseListener {
 			tile.nextState();
 		}
         System.out.println("La tile est de type" + tile.getType() + " et sa valeur est  : " + tile.getValue());
-        tile.callUpdatePanel();
+        
     }
 	
 	@Override

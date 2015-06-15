@@ -219,6 +219,11 @@ public class Board extends Observable {
 	public void setFirstClickMade(boolean firstClickMade) {
 		this.firstClickMade = firstClickMade;
 	}
+	
+	public void callUpdate(){
+		this.setChanged();
+		this.notifyObservers();
+	}
 
 
 }

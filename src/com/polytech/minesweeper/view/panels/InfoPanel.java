@@ -1,29 +1,38 @@
 package com.polytech.minesweeper.view.panels;
 
-import com.polytech.minesweeper.model.Board;
-
 import javax.swing.*;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by Guyl.B on 15/06/15.
  */
-public class InfoPanel extends JPanel implements Observer {
+public class InfoPanel extends JPanel  {
 
     JLabel nbBomb;
+    int nbBombs;
 
-    public InfoPanel() {
+    public InfoPanel(int nbBombs) {
         this.add(new JLabel("Nombre de bombes Restantes"));
-        nbBomb = new JLabel("45");
+        this.nbBombs = nbBombs;
+        nbBomb = new JLabel(String.valueOf(nbBombs));
         this.add(nbBomb);
+        
+    }
+    
+    public void Update(int i){
+    	nbBombs+=i;
+    	nbBomb.setText("");
+    	this.validate();
+    	nbBomb.setText(String.valueOf(nbBombs));
+    	this.validate();
+    	System.out.println(nbBombs);
     }
 
-    @Override
-    public void update(Observable obs, Object o) {
-        this.remove(nbBomb);
-        //Board bd = (Board)obs;
-        nbBomb = new JLabel("3");
-        this.add(nbBomb);
-    }
+	public void removeNbBombs() {
+		Update(-1);
+	}
+	
+	public void addNbBombs(){
+		Update(1);
+	}
+   
 }
