@@ -1,5 +1,7 @@
 package com.polytech.minesweeper.view.windows;
 
+import com.polytech.minesweeper.controleur.actionListeners.OnCancelClicked;
+import com.polytech.minesweeper.controleur.actionListeners.OnQuitClicked;
 import com.polytech.minesweeper.controleur.actions.Quit;
 
 import javax.swing.*;
@@ -85,17 +87,8 @@ public class NewGame extends JFrame{
                                 )
                         )
         );
-/*
 
-        main_panel.add(createLabeledField("Hauteur", height_field = new JTextField()));
-        main_panel.add(createLabeledField("Largeur", width_field = new JTextField()));
-        main_panel.add(createLabeledField("Nombre de bombes", bomb_field = new JTextField()));
-        main_panel.add(createActionedButton(new Quit(), "Annuler"));
-
-
-*/
-
-
+        cancelButton.addActionListener(new OnCancelClicked(this));
         this.setTitle("Nouvelle partie");
         this.setSize(400, 170);
         this.setLocationRelativeTo(null);
