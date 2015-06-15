@@ -51,8 +51,10 @@ public class MainPanel extends JPanel implements Observer {
 
     @Override
     public void update(Observable obs, Object o) {
-    		info.Update(bp.board.getNbBombsLeft());
+    		info.updateTimer(bp.board.time.nbSec);
+    		info.update(bp.board.getNbBombsLeft());
     		System.out.println(bp.board.getNbBombsLeft());
-    	}
+    	
+    }
     }
 

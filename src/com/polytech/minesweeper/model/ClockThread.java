@@ -1,14 +1,20 @@
 package com.polytech.minesweeper.model;
 
-class ClockThread extends Thread
+public class ClockThread extends Thread
 {
-	int nbSec = 0;
+	public int nbSec = 0;
+	private Board board;
 	
+	public ClockThread(Board board) {
+		this.board = board;
+	}
+
 	public void run()
 	{
 		while(true)
 		{
 			nbSec++;
+			this.board.callUpdate();
 			try
 			{
 				sleep(1000);
