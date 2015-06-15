@@ -1,6 +1,7 @@
 package com.polytech.minesweeper.controleur.actionListeners;
 
 import javax.swing.*;
+
 import java.awt.event.ActionListener;
 
 /**
@@ -9,9 +10,15 @@ import java.awt.event.ActionListener;
 public abstract class MenuAction implements ActionListener {
 
     JFrame window;
+    JPanel p;
 
     public MenuAction (JFrame window){
         super();
         this.window = window;
     }
+
+	public MenuAction(JPanel main_panel) {
+		super();
+		this.p = main_panel;
+	}
 }
