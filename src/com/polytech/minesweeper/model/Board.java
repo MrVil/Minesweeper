@@ -18,7 +18,7 @@ public class Board extends Observable {
     private boolean victory = false;
     private boolean defeat = false;
     private int nbBombsLeft;
-    ClockThread time;
+    public ClockThread time;
     
 
     public Board(int width, int height, int nbBombs){
@@ -36,8 +36,7 @@ public class Board extends Observable {
                 tileContext.put(gameboard[i][j], new Vector2(i, j));
             }
         }
-        time = new ClockThread();
-        time.start();
+       
     }
     
     public ArrayList<Tile> getNeightBourgs(Tile tile){
@@ -57,6 +56,8 @@ public class Board extends Observable {
     }
 
     public void placeBombs(Tile tile){
+    	time = new ClockThread(this);
+        time.start();
     	HashMap<Tile, Vector2> copy = new HashMap(tileContext);
     	copy.remove(tile);
     	ArrayList<Tile> neightBourgs = getNeightBourgs(tile);
@@ -174,7 +175,7 @@ public class Board extends Observable {
 					Tile t = gameboard[posx][posy]; 
 					if(t.getState() != Tile.State.revealed && t.getState() != Tile.State.flagged){
 						nbCaseToReveal--;
-						t.reveal();    						  						
+						t.reveal();
 						if(t.getType() == Tile.Type.mined){
 							this.defeat();
 						}
