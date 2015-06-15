@@ -2,6 +2,7 @@ package com.polytech.minesweeper.view.windows;
 
 import com.polytech.minesweeper.controleur.actionListeners.OnCancelClicked;
 import com.polytech.minesweeper.controleur.actionListeners.OnQuitClicked;
+import com.polytech.minesweeper.controleur.actionListeners.StartNewGame;
 import com.polytech.minesweeper.controleur.actions.Quit;
 
 import javax.swing.*;
@@ -18,10 +19,12 @@ public class NewGame extends JFrame{
     private JButton ok_button;
     private JButton cancel_button;
 
-    public NewGame(){
+    public NewGame(JFrame mainWin){
         super();
 
         main_panel = new JPanel();
+
+        int x = 9, y = 9, bomb = 10;
 
         this.setContentPane(main_panel);
 
@@ -33,9 +36,9 @@ public class NewGame extends JFrame{
         JLabel bomb_label = new JLabel("Nombre de bombes");
         JLabel width_label = new JLabel("Largeur");
         JButton okButton = new JButton("Ok");
-        //okButton.addActionListener(new StartNewGame(height_field.));
+        okButton.addActionListener(new StartNewGame(this, mainWin));
         JButton cancelButton = new JButton("Annuler");
-
+        cancelButton.addActionListener(new OnCancelClicked(this));
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,4 +114,15 @@ public class NewGame extends JFrame{
         return result;
     }
 
+    public JTextField getWidth_field() {
+        return width_field;
+    }
+
+    public JTextField getHeight_field() {
+        return height_field;
+    }
+
+    public JTextField getBomb_field() {
+        return bomb_field;
+    }
 }

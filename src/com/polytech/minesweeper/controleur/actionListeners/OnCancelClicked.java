@@ -6,15 +6,15 @@ import javax.swing.JFrame;
 
 public class OnCancelClicked extends MenuAction{
 
+	JFrame window;
 	public OnCancelClicked(JFrame window) {
 		super(window);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		window.setVisible(false);
+		window.dispose();
 	}
 
 }
