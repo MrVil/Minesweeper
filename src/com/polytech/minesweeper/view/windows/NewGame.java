@@ -33,6 +33,7 @@ public class NewGame extends JFrame{
         JLabel bomb_label = new JLabel("Nombre de bombes");
         JLabel width_label = new JLabel("Largeur");
         JButton okButton = new JButton("Ok");
+        //okButton.addActionListener(new StartNewGame(height_field.));
         JButton cancelButton = new JButton("Annuler");
 
 
