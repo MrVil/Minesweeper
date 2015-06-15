@@ -17,6 +17,7 @@ public class Board extends Observable {
     private int nbCaseToReveal;
     private boolean victory = false;
     private boolean defeat = false;
+    private int nbBombsLeft;
     ClockThread time;
     
 
@@ -26,6 +27,7 @@ public class Board extends Observable {
         gameboard = new Tile[width][height];
         tileContext = new HashMap<Tile, Vector2>();
         this.nbBombs = nbBombs;
+        this.setNbBombsLeft(this.nbBombs);
         this.nbCaseToReveal = width*height - nbBombs;
         Tile.Type type = Tile.Type.empty;
         for(int i = 0; i < width; i++){
@@ -196,7 +198,7 @@ public class Board extends Observable {
 		this.revealAll();
 		System.out.println(" Il vous a fallut : " + time.nbSec + " secondes pour terminer le d�mineur");
 		time.stop();
-		this.defeat = false;
+		this.defeat = true;
 	}
 
 	private void revealAll() {
@@ -223,6 +225,14 @@ public class Board extends Observable {
 	public void callUpdate(){
 		this.setChanged();
 		this.notifyObservers();
+	}
+
+	public int getNbBombsLeft() {
+		return nbBombsLeft;
+	}
+
+	public void setNbBombsLeft(int nbBombsLeft) {
+		this.nbBombsLeft = nbBombsLeft;
 	}
 
 

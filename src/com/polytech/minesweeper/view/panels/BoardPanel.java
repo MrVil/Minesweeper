@@ -11,7 +11,7 @@ import javax.swing.*;
  */
 public class BoardPanel extends JPanel{
   
-	Board board;
+	public Board board;
 	
     public BoardPanel(int x, int y, int k, InfoPanel info){
         super(new GridLayout(x,y));

@@ -2,6 +2,8 @@ package com.polytech.minesweeper.view.panels;
 
 import javax.swing.*;
 
+import com.polytech.minesweeper.model.Tile;
+
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -44,10 +46,8 @@ public class MainPanel extends JPanel implements Observer {
 
     @Override
     public void update(Observable obs, Object o) {
-        info.removeNbBombs();
-        //Board bd = (Board)obs;
-        info.nbBomb = new JLabel("3");
-        this.add(info.nbBomb);
+    		info.Update(bp.board.getNbBombsLeft());
+    		System.out.println(bp.board.getNbBombsLeft());
+    	}
     }
 
-}
