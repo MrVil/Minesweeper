@@ -10,12 +10,14 @@ import java.awt.event.ActionEvent;
  */
 public class OnStartClicked extends MenuAction{
 
+    JFrame win;
     public OnStartClicked (JFrame window){
         super(window);
+        win = window;
     }
 
     public void actionPerformed(ActionEvent e) {
-        JFrame newGame = new NewGame();
+        JFrame newGame = new NewGame(win);
 
     }
 
