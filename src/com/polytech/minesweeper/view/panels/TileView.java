@@ -64,6 +64,7 @@ public class TileView extends JPanel implements Observer{
 				}
 	        }
 			if(tile.getState() == Tile.State.hidden){
+				label.setIcon(new ImageIcon(imgBlank));
 				setBackground(Color.GRAY);
 			}
 			if(tile.getState() == Tile.State.flagged){
