@@ -59,7 +59,6 @@ public class Tile extends Observable {
             state = State.revealed;
             callUpdatePanel();
         }
-        
     }
 
 	public void callUpdatePanel() {

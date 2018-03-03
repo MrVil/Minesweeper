@@ -11,7 +11,7 @@ import java.util.Observer;
 /**
  * Created by Vil on 26/05/2015.
  */
-public class Main extends JFrame implements Observer {
+public class Main extends JFrame /*implements Observer*/ {
 
     public Main(int height, int width, int nbBombs){
         super();
@@ -20,7 +20,7 @@ public class Main extends JFrame implements Observer {
         this.setJMenuBar(new MainBar(this));
         this.setContentPane(mp);
 
-        mp.getBoardPanel().getBoard().addObserver(this);
+        //mp.getBoardPanel().getBoard().addObserver(this);
 
         this.setTitle("Polytech - Minesweeper");
         this.setSize(height*50+23, width*50);
@@ -31,7 +31,7 @@ public class Main extends JFrame implements Observer {
 
     }
 
-    @Override
+    /*@Override
     public void update(Observable observable, Object o) {
         Board b = (Board)observable;
         if(b.getVictory()){
@@ -40,5 +40,5 @@ public class Main extends JFrame implements Observer {
         else if(b.getDefeat()){
             JOptionPane.showMessageDialog(this, "Perdu");
         }
-    }
+    }*/
 }
